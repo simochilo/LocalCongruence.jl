@@ -1,11 +1,7 @@
-module SparseMM
-
 using GraphBLASInterface, SuiteSparseGraphBLAS
 using SparseArrays
 using Base.Threads
-using Utils
-
-export sm2gbm, gbm2sm, gbm_new, gbv_new, mm, sm, v2m, dmv, div_by_two, div_by_two!
+include("Utils.jl")
 
 GrB_init(GrB_NONBLOCKING)
 
@@ -191,6 +187,3 @@ function d3(A::GrB_Matrix, B::GrB_Matrix)
     res = dmv(C, V)
     return res
 end
-
-end
-

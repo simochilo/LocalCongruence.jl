@@ -1,10 +1,7 @@
-push!(LOAD_PATH, "./")
-
-using SparseMM
 using BenchmarkTools
-using Utils
 using GraphBLASInterface, SuiteSparseGraphBLAS
 using SparseArrays, NearestNeighbors
+include("SparseMM.jl")
 
 function __msc0(D::GrB_Matrix{T}, cols, r) where T
     Ires, Xres = ZeroBasedIndex[], T[]
