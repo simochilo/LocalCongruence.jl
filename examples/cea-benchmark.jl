@@ -8,7 +8,7 @@ using SuiteSparseGraphBLAS, GraphBLASInterface
 using SparseMM
 using LocalCongruence
 
-LC = LocalCongruences
+LC = LocalCongruence
 
 # Sample 1
 

@@ -134,6 +134,14 @@ uuid = "6462fe0b-24de-5631-8697-dd941f90decc"
 deps = ["LinearAlgebra", "Random"]
 uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 
+[[SparseMM]]
+deps = ["GraphBLASInterface", "SparseArrays", "SuiteSparseGraphBLAS"]
+git-tree-sha1 = "ffc77b9798c7c10ed00f39ae104c82247d05dd10"
+repo-rev = "master"
+repo-url = "https://github.com/cvdlab/SparseMM"
+uuid = "3ca99d5a-6b98-11ea-3bb7-df5801fb527a"
+version = "0.1.0"
+
 [[StaticArrays]]
 deps = ["LinearAlgebra", "Random", "Statistics"]
 git-tree-sha1 = "5a3bcb6233adabde68ebc97be66e95dcb787424c"
