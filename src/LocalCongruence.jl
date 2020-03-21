@@ -1,4 +1,4 @@
-module LocalCongruences
+module LocalCongruence
 	using DataStructures
 	using LinearAlgebraicRepresentation
 	using NearestNeighbors

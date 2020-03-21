@@ -4,9 +4,10 @@ using BenchmarkTools
 using LinearAlgebraicRepresentation
 Lar = LinearAlgebraicRepresentation
 using NearestNeighbors, DataStructures, SparseArrays
+using SuiteSparseGraphBLAS, GraphBLASInterface
 using SparseMM
+using LocalCongruence
 
-include("../src/LocalCongruences.jl")
 LC = LocalCongruences
 
 # Sample 1
@@ -29,23 +30,18 @@ Delta_1 = SparseArrays.sparse((
 )...);
 T = [Delta_0, Delta_1];
 
-include("./cea-SM.jl");
-#include("./cea-algorithm.jl")
-include("./cea-AA.jl")
-include("./cea-GB.jl")
-
 @benchmark LC.chainCongruence(G, T)
 
 #@benchmark chainCongruenceSM(W, T)
 
 @benchmark LC.chainCongruenceAA(W, T)
 
-W_GB = SparseMM.sm2gbm(W)
+
 Delta_0_GB = SparseMM.sm2gbm(Delta_0)
 Delta_1_GB = SparseMM.sm2gbm(Delta_1)
 T_GB = [Delta_0_GB, Delta_1_GB]
 
-@benchmark LC.chainCongruenceGB(W_GB, T_GB)
+@benchmark LC.chainCongruenceGB(W, T_GB)
 
 
 
@@ -69,9 +65,8 @@ T = [Delta_0, Delta_1];
 @benchmark LC.chainCongruenceAA(W, T)
 
 
-W_GB = SparseMM.sm2gbm(W)
 Delta_0_GB = SparseMM.sm2gbm(Delta_0)
 Delta_1_GB = SparseMM.sm2gbm(Delta_1)
 T_GB = [Delta_0_GB, Delta_1_GB]
 
-@benchmark LC.chainCongruenceGB(W_GB, T_GB)
+@benchmark LC.chainCongruenceGB(W, T_GB)

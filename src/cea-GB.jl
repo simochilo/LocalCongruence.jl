@@ -1,6 +1,6 @@
 function __msc0(D::GrB_Matrix{T}, cols, r) where T
     Ires, Xres = ZeroBasedIndex[], T[]
-    vec = gbv_new(T, r)
+    vec = SparseMM.gbv_new(T, r)
 
     for j in cols
         GrB_Col_extract(vec, GrB_NULL, GrB_NULL, D, GrB_ALL, 0, ZeroBasedIndex(j.x-1), GrB_NULL)
@@ -17,7 +17,7 @@ end
 
 function msc(D::GrB_Matrix{T}, v, sort_list=false) where T
     r = GrB_Matrix_nrows(D)
-    res = gbm_new(T, r, length(v))
+    res = SparseMM.gbm_new(T, r, length(v))
     
     if sort_list
         v = sort(v)
@@ -35,7 +35,7 @@ function msc(D::GrB_Matrix{T}, v, sort_list=false) where T
         append!(J, fill(i-1, length(_X)))
     end
 
-    GrB_Matrix_build(res, I, J, X, length(X), GrB_op("PLUS", T))
+    GrB_Matrix_build(res, I, J, X, length(X), SparseMM.GrB_op("PLUS", T))
 
     return res
 
@@ -60,7 +60,7 @@ function cellCongruence(Delta::GrB_Matrix{T}, vclasses) where T
     eclasses = __congruence(copEV)
     newedges = first.(eclasses)
     
-    res = gbm_new(T, GrB_Matrix_ncols(copEV), length(newedges))
+    res = SparseMM.gbm_new(T, GrB_Matrix_ncols(copEV), length(newedges))
 
     I, J, X = GrB_Matrix_extractTuples(copEV)
     _I, _J, _X = ZeroBasedIndex[], ZeroBasedIndex[], T[]
@@ -73,7 +73,7 @@ function cellCongruence(Delta::GrB_Matrix{T}, vclasses) where T
         end
     end
 
-    GrB_Matrix_build(res, _I, _J, _X, length(_X), GrB_op("FIRST", T))
+    GrB_Matrix_build(res, _I, _J, _X, length(_X), SparseMM.GrB_op("FIRST", T))
     return res, eclasses
 end
 
