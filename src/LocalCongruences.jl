@@ -3,11 +3,14 @@ module LocalCongruences
 	using LinearAlgebraicRepresentation
 	using NearestNeighbors
 	using SparseArrays
+	using GraphBLASInterface
+	using SuiteSparseGraphBLAS
+	using SparseMM
 	Lar = LinearAlgebraicRepresentation
 
 	include("cea-AA.jl")
 	include("cea-SM.jl")
-#	include("cea-algorithm.jl")
+	include("cea-GB.jl")
 
-	export chainCongruence, chainCongruenceAA
+	export chainCongruence, chainCongruenceAA, chainCongruenceGB
 end
