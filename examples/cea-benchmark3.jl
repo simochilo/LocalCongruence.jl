@@ -6,6 +6,7 @@ using LocalCongruence
 using LinearAlgebraicRepresentation
 Lar = LinearAlgebraicRepresentation
 using NearestNeighbors, DataStructures, SparseArrays
+using SuiteSparseGraphBLAS, GraphBLASInterface
 
 LC = LocalCongruence
 
