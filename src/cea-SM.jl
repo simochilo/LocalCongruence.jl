@@ -15,16 +15,13 @@ The method returns:
 #		err=1e-6
 #	)::Tuple{Lar.Points, Array{Array{Int,1},1}}
 function vertCongruence(V; err=1e-6)
-
 	Vcls    = []
-	let nidx = 1,
-		visited = [],
+	let visited = [],
 		kdtree  = NearestNeighbors.KDTree(V);
 		for vidx = 1 : size(V, 2)  if !(vidx in visited)
 			nearvs = NearestNeighbors.inrange(kdtree, V[:, vidx], err)
 			push!(Vcls, nearvs)
 			push!(visited, nearvs...)
-			nidx += 1
 		end  end
 	end
 
@@ -86,8 +83,6 @@ function cellCongruence(cop, lo_cls, lo_sign; imp = false, d = 0)
 	end
 
 	# Retrieve Matrix Form and extract rows
-#	[x for i = 1 : length(lo_cls) if (x = sum(cop[:, lo_cls[i]], dims = 2))>d]
-#	rows = [[copCols[col][row] for row = 1 : cop.m] for col = 1:length(lo_cls)]
 	cop = hcat(copCols...)
 	rows = [cop[row, :] for row = 1 : cop.m]
 
