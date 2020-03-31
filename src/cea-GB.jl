@@ -1,4 +1,33 @@
-function __msc0(D::GrB_Matrix{T}, cols, r) where T
+"""
+    vcongruence(V; ϵ=1e-6)
+
+Discovers the ϵ-nearess vertices on 3D input point set V.
+
+# Arguments
+ - `V`: a list of 3D points
+ - `ϵ=1e-6`: ϵ distance
+
+# Return
+ - `W`: vertices for each ϵ-congruent class
+ - `Vcls`: a map of old vertices
+"""
+function vcongruence(V; ϵ=1e-6)
+	Vcls, visited = [], []
+	kdtree = NearestNeighbors.KDTree(V);
+    for vidx = 1:size(V, 2)
+        if !(vidx in visited)
+		    nearvs = NearestNeighbors.inrange(kdtree, V[:, vidx], ϵ)
+		    push!(Vcls, nearvs)
+		    push!(visited, nearvs...)
+        end
+    end
+	W = hcat([sum(V[:, cl], dims=2)/length(cl) for cl in Vcls]...)
+	return W, Vcls
+end
+
+
+function __msc0(D::GrB_Matrix{T}, cols) where T
+    r = GrB_Matrix_nrows(D)
     Ires, Xres = ZeroBasedIndex[], T[]
     vec = SparseMM.gbv_new(T, r)
 
@@ -15,20 +44,25 @@ function __msc0(D::GrB_Matrix{T}, cols, r) where T
 
 end
 
-function msc(D::GrB_Matrix{T}, v, sort_list=false) where T
+"""
+    msc(D::GrB_Matrix{T}, v)
+
+Sums D's columns which indexes are in V
+
+# Arguments
+ - `D`: a GraphBLAS matrix
+ - `v`: list of indices
+"""
+function msc(D::GrB_Matrix{T}, v) where T
     r = GrB_Matrix_nrows(D)
     res = SparseMM.gbm_new(T, r, length(v))
-    
-    if sort_list
-        v = sort(v)
-    end
 
     X = T[]
     J = ZeroBasedIndex[]
     I = ZeroBasedIndex[]
 
     for (i, c) in enumerate(v)
-        _I, _X = __msc0(D, c, r)
+        _I, _X = __msc0(D, c)
 
         append!(I, _I)
         append!(X, _X)
@@ -41,8 +75,17 @@ function msc(D::GrB_Matrix{T}, v, sort_list=false) where T
 
 end
 
-function cellCongruence(Delta::GrB_Matrix{T}, vclasses) where T
-    copEV = msc(Delta, vclasses)
+"""
+    cellCongruence(Delta::GrB_Matrix{T}, vclasses)
+
+Performs the Cell Congruence Enabling algorithm.
+
+# Arguments
+ - `Delta`: the Cochain operator
+ - `classes`: list that indentifies old cells
+"""
+function cellCongruence(Delta::GrB_Matrix{T}, classes) where T
+    copEV = msc(Delta, classes)
 
     function __congruence(copEV::GrB_Matrix{T}) where T
         ec = Dict{ZeroBasedIndex, Array{ZeroBasedIndex, 1}}()
@@ -77,6 +120,11 @@ function cellCongruence(Delta::GrB_Matrix{T}, vclasses) where T
     return res, eclasses
 end
 
+"""
+    chainCongruenceGB(G, Top)
+
+Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T``
+"""
 function chainCongruenceGB(W, Top)
 	V, cls = vcongruence(W)
 	cls = [[ZeroBasedIndex(c) for c in cl] for cl in cls]
@@ -87,21 +135,4 @@ function chainCongruenceGB(W, Top)
 	end
 
 	return V, Topn
-end
-
-function vcongruence(V; err=1e-6)
-	Vcls    = []
-	let nidx = 1,
-		visited = [],
-		kdtree  = NearestNeighbors.KDTree(V);
-		for vidx = 1 : size(V, 2)  if !(vidx in visited)
-			nearvs = NearestNeighbors.inrange(kdtree, V[:, vidx], err)
-			push!(Vcls, nearvs)
-			push!(visited, nearvs...)
-			nidx += 1
-		end  end
-	end
-
-	V = hcat([sum(V[:, cl], dims=2)/length(cl) for cl in Vcls]...)
-	return V, Vcls
 end
