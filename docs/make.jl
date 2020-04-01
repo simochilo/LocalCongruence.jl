@@ -2,10 +2,15 @@ push!(LOAD_PATH,"../src/")
 
 using Documenter, LocalCongruence
 
-makedocs(
-	format = :html,
+Documenter.makedocs(
+	modules = [LocalCongruence],
+    format = Documenter.HTML(
+        # assets = ["assets/LocalCongruence.css", "assets/logo.png"],
+        highlights = ["yaml"],
+	),
+	clean = true,
 	sitename = "LocalCongruence.jl",
-	assets = ["assets/LocalCongruence.css", "assets/logo.png"],
+	authors = "Gianmaria Del Monte, Elia Onofri, Giorgio Scorzelli and Alberto Paoluzzi.",
 	pages = [
 		"1 - Home" => "index.md",
 		"2 - Getting Started" => "start.md",
