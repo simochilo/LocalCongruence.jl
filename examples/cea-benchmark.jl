@@ -32,7 +32,7 @@ Delta_1 = SparseArrays.sparse((
 )...);
 T = [Delta_0, Delta_1];
 
-@benchmark LC.chainCongruence(G, T)
+@benchmark LC.chainCongruenceSM(G, T)
 
 #@benchmark chainCongruenceSM(W, T)
 
@@ -60,7 +60,7 @@ Delta_1 = SparseArrays.sparse(([1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 
 
 T = [Delta_0, Delta_1];
 
-@benchmark LC.chainCongruence(G, T)
+@benchmark LC.chainCongruenceSM(G, T)
 
 #@benchmark chainCongruenceSM(W, T)
 

@@ -1,43 +1,13 @@
-"""
-	vertCongruence(V::Lar.Array{Float64,2}; err=1e-6)
-
-Evaluates the Vertex Congruence for 3D-points ``V ∈ ℳ(3,n)``.
-
-The function determines the points of ``V`` closer than ``err`` and
-builds a new Vertex Set made of the representative of each point cluster.
-
-The method returns:
- - the new Vertex Set
- - a map that, for every new vertex, identifies the old vertices it is made of
-"""
-#function vertCongruence(
-#		V::Lar.Array{Float64,2};
-#		err=1e-6
-#	)::Tuple{Lar.Points, Array{Array{Int,1},1}}
-function vertCongruence(V; err=1e-6)
-	Vcls    = []
-	let visited = [],
-		kdtree  = NearestNeighbors.KDTree(V);
-		for vidx = 1 : size(V, 2)  if !(vidx in visited)
-			nearvs = NearestNeighbors.inrange(kdtree, V[:, vidx], err)
-			push!(Vcls, nearvs)
-			push!(visited, nearvs...)
-		end  end
-	end
-
-	V = hcat([sum(V[:, cl], dims=2)/length(cl) for cl in Vcls]...)
-	return V, Vcls
-end
-
+LC = LocalCongruence
 
 """
-	cellCongruence(
+	cellCongruenceSM(
 		cop::Lar.ChainOp,
 		lo_cls::Array{Array{Int,1},1},
 		lo_sign::Array{Array{Int8,1},1};
 		imp = false,
 		d = 0
-	)
+	)::Tuple{ Lar.ChainOp,  Array{Array{Int,1},1},  Array{Array{Int8,1},1} }
 
 Evaluates the Cell Congruence for a Cochain ``cop`` with classes ``lo_cls``.
 
@@ -55,18 +25,7 @@ The method returns:
  - a map that, for every new cell, identifies the old cells it is made of
  - a map that, for every new cell, specify if old cells have changed ordering.
 """
-function cellCongruence(cop, lo_cls, lo_sign; imp = false, d = 0)
-#function cellCongruence(
-#		cop::Lar.ChainOp,
-#		lo_cls::Array{Array{Int,1},1},
-#		lo_sign::Array{Array{Int8,1},1};
-#		imp = false,
-#		d = 0
-#	)::Tuple{
-#		Lar.ChainOp,
-#		Array{Array{Int,1},1},
-#		Array{Array{Int8,1},1}
-#	}
+function cellCongruenceSM(cop, lo_cls, lo_sign; imp = false, d = 0)
 
 	# Collide columns
 	copCols = []
@@ -113,26 +72,23 @@ function cellCongruence(cop, lo_cls, lo_sign; imp = false, d = 0)
 end
 
 """
-	chainCongruence(G::Lar.Points, T::Array{Lar.ChainOp}; imp=false, err=1e-6)
+	chainCongruenceSM(
+		G::Lar.Points, T::Array{Lar.ChainOp};
+		imp=false, err=1e-6
+	)::Tuple{Lar.Points, Array{Lar.ChainOp}}
 
 Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T``
 """
-function chainCongruence(G, T; imp=false, err=1e-6)
-#function chainCongruence(
-#		G::Lar.Points,
-#		T::Array{Lar.ChainOp};
-#		imp=false,
-#		err=1e-6
-#	)::Tuple{Lar.Points, Array{Lar.ChainOp}}
+function chainCongruenceSM(G, T; imp=false, err=1e-6)
 
 	# Perform the Geometry Congruence
-	G, cls = vertCongruence(G; err=err)
+	G, cls = LC.vertCongruence(G; err=err)
 	# Build default sign
 	sign = [ones(Int8, length(cl)) for cl in cls]
 	# Update the Topology coherently
 	Tn = Array{Lar.ChainOp, 1}(undef, length(T))
 	for d = 1 : length(T)
-		Tn[d], cls, sign = cellCongruence(T[d], cls, sign; imp=imp, d=d)
+		Tn[d], cls, sign = LC.cellCongruenceSM(T[d], cls, sign; imp=imp, d=d)
 	end
 	# Euler Characteristic
 	# @show size(G,2) - size(T[1],1) + size(T[2],1)
