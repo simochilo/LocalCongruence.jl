@@ -18,10 +18,13 @@ matrix:
 notifications:
   email: false
 
+before_install:
+  - julia -e 'using Pkg; Pkg.add("Documenter"); include(joinpath("docs", "make.jl"))';
+
 after_success:
-  - julia -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("Coverage");'
-  - julia -e 'import LocalCongruence; cd(dirname(dirname(pathof(LocalCongruence)))); include(joinpath("docs", "make.jl"))'
-  - julia -e 'using Coverage; import LocalCongruence; cd(dirname(dirname(pathof(LocalCongruence)))); Codecov.submit(process_folder())'
+#  - julia -e 'using Pkg; Pkg.add("Documenter"); Pkg.add("Coverage");'
+#  - julia -e 'import LocalCongruence; cd(dirname(dirname(pathof(LocalCongruence)))); include(joinpath("docs", "make.jl"))'
+#  - julia -e 'using Coverage; import LocalCongruence; cd(dirname(dirname(pathof(LocalCongruence)))); Codecov.submit(process_folder())'
 
 deploy:
   provider: pages
