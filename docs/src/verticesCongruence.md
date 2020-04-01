@@ -24,6 +24,28 @@ Do note that this powerful feature may actually cause loss in the topological
 structure: low resolution processing decrease in fact further steps computation
 complexity at the cost of a information loss.
 
+In order to keep the complex as similar as possible to the input,
+each points class is identified as the mean point of the set.
+
 We employ a _KDTree_ structure in order to speedup the point scan;
-this however means that 
+this however means that if points are supplied in different order,
+a different geometrical pattern may be generated
+(even a diffent number of points)
+
+```jl
+err = 1e-8
+V = [
+    0.0  err  0.0 -err  0.0  0.0
+    0.0  0.0  err  0.0 -err  0.0
+]
+
+vertCongruence(V[:, 1:5])
+
+vertCongruence(V[:, 2:6])
+```
+
+<!-- add picture -->
+
+
+
 
