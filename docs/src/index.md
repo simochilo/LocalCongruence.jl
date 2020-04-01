@@ -1,11 +1,11 @@
-# 1 - LocalCongruences.jl
+# 1 - LocalCongruence.jl
 
-`LocalCongruences.jl` is a [Julia](http://julialang.org) library that provides some tool ...
+`LocalCongruence.jl` is a [Julia](http://julialang.org) library that provides some tool ...
 
 
 ## Dependencies
 
-`LocalCongruences.jl` has the following dependeces:
+`LocalCongruence.jl` has the following dependeces:
  - [```DataStructures.jl```](https://github.com/JuliaCollections/DataStructures.jl)
  - [```LinearAlgebraicRepresentation```](https://github.com/cvdlab/LinearAlgebraicRepresentation.jl) by CVD Lab
  - [```using NearestNeighbors.jl```](https://github.com/KristofferC/NearestNeighbors.jl)

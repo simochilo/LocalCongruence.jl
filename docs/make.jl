@@ -1,11 +1,11 @@
 push!(LOAD_PATH,"../src/")
 
-using Documenter, LocalCongruences
+using Documenter, LocalCongruence
 
 makedocs(
 	format = :html,
-	sitename = "LocalCongruences.jl",
-	assets = ["assets/LocalCongruences.css", "assets/logo.png"],
+	sitename = "LocalCongruence.jl",
+	assets = ["assets/LocalCongruence.css", "assets/logo.png"],
 	pages = [
 		"1 - Home" => "index.md",
 		"2 - Getting Started" => "start.md",

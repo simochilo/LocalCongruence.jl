@@ -1,2 +1,2 @@
-# LocalCongruences.jl
+# LocalCongruence.jl
 Local Congruence for Chain Complexes
