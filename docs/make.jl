@@ -5,7 +5,7 @@ using Documenter, LocalCongruence
 Documenter.makedocs(
 	modules = [LocalCongruence],
     format = Documenter.HTML(
-        # assets = ["assets/LocalCongruence.css", "assets/logo.png"],
+        assets = ["assets/LocalCongruence.css"],
         highlights = ["yaml"],
 	),
 	clean = true,

@@ -1,2 +1,2 @@
-# B - Bibliography
+# B - The Bibliography
 
