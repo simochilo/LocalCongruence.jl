@@ -1,0 +1,29 @@
+# 5.0 - Vertices Congruence Algorithm
+
+The Vertices congruence is the base of the
+```Cell Congruence Enabling Algorithm```.
+
+The merging procedure relies on the fact that points closed enought are
+actually the same point.
+This highlights the dichotomical relation between geometry and topology
+within a model:
+space location (**Geometry**) is needed in order to retrieve wich point to merge and consequently update the chain complexes (**Topology**).
+
+The following interface allows close point recognition.
+```@docs
+LC.vertCongruence
+```
+
+The value ``\epsilon > 0`` actually serve as a discriminant for well
+understending whether different points are actually the same.
+As a side effect it also sets the resolution employed by the ```CCE``` algorithm
+itself since, even if points within the resolution where different
+at first glance, they arise to be the same after this procedure.
+
+Do note that this powerful feature may actually cause loss in the topological
+structure: low resolution processing decrease in fact further steps computation
+complexity at the cost of a information loss.
+
+We employ a _KDTree_ structure in order to speedup the point scan;
+this however means that 
+

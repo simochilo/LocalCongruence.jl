@@ -74,15 +74,15 @@ end
 """
 	chainCongruenceSM(
 		G::Lar.Points, T::Array{Lar.ChainOp};
-		imp=false, err=1e-6
+		imp=false, ϵ=1e-6
 	)::Tuple{Lar.Points, Array{Lar.ChainOp}}
 
 Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T``
 """
-function chainCongruenceSM(G, T; imp=false, err=1e-6)
+function chainCongruenceSM(G, T; imp=false, ϵ=1e-6)
 
 	# Perform the Geometry Congruence
-	G, cls = LC.vertCongruence(G; err=err)
+	G, cls = LC.vertCongruence(G; ϵ=ϵ)
 	# Build default sign
 	sign = [ones(Int8, length(cl)) for cl in cls]
 	# Update the Topology coherently

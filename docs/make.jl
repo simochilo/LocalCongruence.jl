@@ -1,6 +1,7 @@
 push!(LOAD_PATH,"../src/")
 
 using Documenter, LocalCongruence
+LC = LocalCongruence
 
 Documenter.makedocs(
 	modules = [LocalCongruence],
@@ -17,6 +18,7 @@ Documenter.makedocs(
 		"3 - Complexes and Chain Operators" => "theory.md",
 		"4 - Graph Blas Introduction" => "graph_blas.md",
 		"Cell Congruence Enabling" => [
+			"5.0 - Vertices Congruence" => "verticesCongruence.md",
 			"5.1 - Array of Arrays" => "aa_implementation.md",
 			"5.2 - Native Sparse Matrices" => "sm_implementation.md",
 			"5.3 - Graph Blas" => "gb_implementation.md",
