@@ -16,7 +16,7 @@ Documenter.makedocs(
 		"1 - Home" => "index.md",
 		"2 - Getting Started" => "start.md",
 		"3 - Complexes and Chain Operators" => "theory.md",
-		"4 - Graph Blas Introduction" => "graph_blas.md",
+		"4 - GraphBLAS Introduction" => "graph_blas.md",
 		"Cell Congruence Enabling" => [
 			"5.1 - Vertices Congruence" => "verticesCongruence.md",
 			"5.2 - Chain Complex Congruence" => "chainComplexCongruence.md",
