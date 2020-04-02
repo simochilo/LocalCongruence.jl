@@ -1,31 +1,3 @@
-"""
-    vcongruence(V; ϵ=1e-6)
-
-Discovers the ϵ-nearess vertices on 3D input point set V.
-
-# Arguments
- - `V`: a list of 3D points
- - `ϵ=1e-6`: ϵ distance
-
-# Return
- - `W`: vertices for each ϵ-congruent class
- - `Vcls`: a map of old vertices
-"""
-function vcongruence(V; ϵ=1e-6)
-	Vcls, visited = [], []
-	kdtree = NearestNeighbors.KDTree(V);
-    for vidx = 1:size(V, 2)
-        if !(vidx in visited)
-		    nearvs = NearestNeighbors.inrange(kdtree, V[:, vidx], ϵ)
-		    push!(Vcls, nearvs)
-		    push!(visited, nearvs...)
-        end
-    end
-	W = hcat([sum(V[:, cl], dims=2)/length(cl) for cl in Vcls]...)
-	return W, Vcls
-end
-
-
 function __msc0(D::GrB_Matrix{T}, cols) where T
     r = GrB_Matrix_nrows(D)
     Ires, Xres = ZeroBasedIndex[], T[]
@@ -123,10 +95,10 @@ end
 """
     chainCongruenceGB(G, Top)
 
-Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T``
+Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T`` (GraphBLAS implementation)
 """
 function chainCongruenceGB(W, Top)
-	V, cls = vcongruence(W)
+	V, cls = vertCongruence(W)
 	cls = [[ZeroBasedIndex(c) for c in cl] for cl in cls]
 
 	Topn = Array{GrB_Matrix{Int8}}(undef, length(Top))
