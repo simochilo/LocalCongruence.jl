@@ -1,4 +1,4 @@
-# 5.1 - Vertices Congruence Algorithm
+# 4.1 - Vertices Congruence Algorithm
 
 The Vertices congruence is the base of the
 ```Cell Congruence Enabling Algorithm```.

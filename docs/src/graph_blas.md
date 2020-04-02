@@ -1,4 +1,4 @@
-# 4 - Introduction to GraphBLAS Framework
+# 3 - Introduction to GraphBLAS Framework
 [GraphBLAS](http://graphblas.org/i) is an API that defines a set of sparse matrix operation based on an algebra of semirings and designed to do computation on graphs.
 
 Local congruence of Chain Complexes extends GraphBLAS domain from graphs to cellular complexes.

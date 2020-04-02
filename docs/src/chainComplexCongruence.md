@@ -1,4 +1,4 @@
-# 5.2 - Chain Complex Congruence
+# 4.2 - Chain Complex Congruence
 
 Once the **Geometry** of the model has been arranged,
 **Topology** must be updated as well.

@@ -21,7 +21,7 @@ solving topologically the numerical inaccuracies of floating-point arithmetics.
  - [```DataStructures.jl```](https://github.com/JuliaCollections/DataStructures.jl)
  - [```GraphBLASInterface.jl```](https://github.com/abhinavmehndiratta/GraphBLASInterface.jl)
  - [```LinearAlgebraicRepresentation```](https://github.com/cvdlab/LinearAlgebraicRepresentation.jl)
- - [```using NearestNeighbors.jl```](https://github.com/KristofferC/NearestNeighbors.jl)
+ - [```NearestNeighbors.jl```](https://github.com/KristofferC/NearestNeighbors.jl)
  - [```SparseArrays.jl```](https://github.com/JuliaLang/julia/tree/master/stdlib/SparseArrays)
  - [```SparseMM.jl```](https://github.com/cvdlab/SparseMM.jl)
  - [```SuiteSparseGraphBLAS```](https://github.com/abhinavmehndiratta/SuiteSparseGraphBLAS.jl)
@@ -30,6 +30,12 @@ In addition [CVD-Lab](https://github.com/cvdlab) provides also
 [ViewerGL](https://github.com/cvdlab/ViewerGL.jl), an OpenGL
 3D interactive viewer adopted in the examples of this module
 
+## Installing
+
+```julia
+]add https://github.com/cvdlab/LocalCongruence.jl
+```
+
 ## Documentation
 
-Find the Documentation [`HERE`](https://cvdlab.github.io/LocalCongruence.jl/)
+Find the Documentation [`here`](https://cvdlab.github.io/LocalCongruence.jl/)
