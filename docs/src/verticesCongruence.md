@@ -1,4 +1,4 @@
-# 5.0 - Vertices Congruence Algorithm
+# 5.1 - Vertices Congruence Algorithm
 
 The Vertices congruence is the base of the
 ```Cell Congruence Enabling Algorithm```.
@@ -32,7 +32,7 @@ this however means that if points are supplied in different order,
 a different geometrical pattern may be generated
 (even a diffent number of points)
 
-```jl
+```julia
 err = 1e-8
 V = [
     0.0  err  0.0 -err  0.0  0.0

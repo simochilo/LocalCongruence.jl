@@ -11,6 +11,7 @@ LinearAlgebraicRepresentation standars, this Julia Module compute a the single
 corresponding global complex using ``\epsilon``-congruence of cells,
 solving topologically the numerical inaccuracies of floating-point arithmetics.
 
+The code is currently working as part of the `Lar.Arrangment` workflow. 
 
 ## Dependencies
 
