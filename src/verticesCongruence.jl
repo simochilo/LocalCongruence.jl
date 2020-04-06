@@ -3,7 +3,7 @@
 
 Evaluates the Vertex Congruence for 3D-points ``V ∈ ℳ(3,n)``.
 
-The function determines the points of ``V`` closer than ``ϵ`` and
+The function determines the points of `V` closer than `ϵ` and
 builds a new Vertex Set made of the representative of each point cluster.
 
 The method returns:

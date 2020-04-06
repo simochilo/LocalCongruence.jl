@@ -9,15 +9,15 @@ LC = LocalCongruence
 		d = 0
 	)::Tuple{ Lar.ChainOp,  Array{Array{Int,1},1},  Array{Array{Int8,1},1} }
 
-Evaluates the Cell Congruence for a Cochain ``cop`` with classes ``lo_cls``.
+Evaluates the Cell Congruence for a Cochain `cop with classes `lo_cls.
 
-The function determines the new Cochain Operator built from ``cop`` where
-the lower order cells are merged according to ``lo_cls`` map.
-``lo_sign`` specifies whether a cell must be considered in reverse order.
+The function determines the new Cochain Operator built from `cop` where
+the lower order cells are merged according to `lo_cls` map.
+`lo_sign` specifies whether a cell must be considered in reverse order.
 
-If optional paramenter ``imp`` is set to ``true`` then FP imprecisions
+If optional paramenter `imp` is set to `true` then FP imprecisions
 are taken into account in the sense that lower order cells may have collided.
-The parameter ``d`` represent then the order of the cell (that also is the
+The parameter `d` represent then the order of the cell (that also is the
 least number of lower order cells a current order cell is made of).
 
 The method returns:
@@ -77,7 +77,7 @@ end
 		imp=false, ϵ=1e-6
 	)::Tuple{Lar.Points, Array{Lar.ChainOp}}
 
-Perform the Geometry ``G`` congruence and coherently reshape the Topology ``T``
+Perform the Geometry `G` congruence and coherently reshape the Topology `T`
 """
 function chainCongruenceSM(G, T; imp=false, ϵ=1e-6)
 
