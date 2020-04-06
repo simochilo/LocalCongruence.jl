@@ -32,20 +32,19 @@ this however means that if points are supplied in different order,
 a different geometrical pattern may be generated
 (even a diffent number of points)
 
-```julia
+```@Eval
 err = 1e-8
 V = [
     0.0  err  0.0 -err  0.0  0.0
     0.0  0.0  err  0.0 -err  0.0
 ]
 
-vertCongruence(V[:, 1:5])
+LC.vertCongruence(V[:, 1:5])
 
-vertCongruence(V[:, 2:6])
+LC.vertCongruence(V[:, 2:6])
 ```
 
-<!-- add picture -->
-
-
+![](./images/verticesCongruenceDiff.png)
+> **Figure1** Output of the two `vertCongruence()` calls.
 
 

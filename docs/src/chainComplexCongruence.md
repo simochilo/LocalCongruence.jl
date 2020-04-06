@@ -10,25 +10,18 @@ This is what we refer to `lower_order_classes` w.r.t. ``[\Delta_0]``,
 the 1-Cochain operator matrix (in short `lo_cls`). This map, built as a Julia
 `Array{Array{Int,1},1}`, is needed when building ``[\delta_0]``.
 In particular, the `cellCongruence()` for ``[\Delta_k]`` produces both
-``\[delta_k]`` and a map for cell classes that behaves like the one produced by
+``[\delta_k]`` and a map for cell classes that behaves like the one produced by
 `vertCongruence()`: this way the same method can be employed iterativelly
 over all the Cochain Operators, from the lowest degree up to the hihest.
 
 Under general setting, given a Cochain operator ``[\Delta_k] : C_{k-1} \to C_k``
 and a `lo_cls` map steps are needed:
-  1. ``C_{k-1}`` cells are identified with their new representative index
-  according the mapping `lo_cls`.
-  1. ``C_k`` cells are purged from duplicates cells ``C_{k-1}``.
-    If this occurres then the corresponding cell topology has changed and this
-    follows from low resolution problems.
-    * If a cell results in having less than ``k + 2`` elements, then it is
-      discarded since it has been assimilated in lower order cells. 
-    * Due to low resolution problems topological gift wrapping (TGW) algorithm
-      may be required on ``\{C_k\}_{k>1}`` since new cell may have been formed.
-  1. ``C_k`` cells are compared and duplicates are removed.
-  1. A map `ho_cls` (we refer to it as _higher order_ in contrast with `lo_cls`)
-    between ``C_k`` of ``[\Delta_k]`` and the survivors from previous step
-    is built. 
+* ``C_{k-1}`` cells are identified with their new representative index according the mapping `lo_cls`.
+* ``C_k`` cells are purged from duplicates cells ``C_{k-1}``. If this occurres then the corresponding cell topology has changed and this follows from low resolution problems.
+  * If a cell results in having less than ``k + 2`` elements, then it is discarded since it has been assimilated in lower order cells.
+  * Due to low resolution problems topological gift wrapping (TGW) algorithm may be required on ``\{C_k\}_{k>1}`` since new cell may have been formed.
+* ``C_k`` cells are compared and duplicates are removed.
+* A map `ho_cls` (we refer to it as _higher order_ in contrast with `lo_cls`) between ``C_k`` of ``[\Delta_k]`` and the survivors from previous step is built. 
 
 In the original use case of the `Arrangment` pipeline the Cochain Operator
 Matrices ``[\Delta_k]`` providden as input have values accumulated on the
@@ -40,13 +33,16 @@ be required: _e.g._ only points from diffenet complexes are possibly merged.
 
 Three implementation are provided in this package.
 
-## 5.2.1 - Array of Array based implementation
+## Array of Array based
 
 ```@docs
 LC.cellCongruenceAA
 ```
 
-## 5.2.2 - Native Julia Sparse Matrices based implementation
+## Native Julia Sparse Matrices
+
+
+Docstring follows
 
 ```@docs
 LC.cellCongruenceSM
@@ -70,10 +66,12 @@ Do note that points do not come with a sign so when ``[\Delta_0]`` is built,
 lo_sign = [ones(Int8, length(cl)) for cl in lo_cls]
 ```
 
-## 5.2.3 - `GraphBlas` based implementation
+
+## `GraphBlas` based
+
 
 ```@docs
 LC.cellCongruenceGB
 ```
 
-## 5.2.4 - Time and Space comparisons
+## Time and Space comparisons
