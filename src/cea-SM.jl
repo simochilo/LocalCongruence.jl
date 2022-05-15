@@ -94,3 +94,6 @@ function chainCongruenceSM(G, T; imp=false, ϵ=1e-6)
 	# @show size(G,2) - size(T[1],1) + size(T[2],1)
 	return G, Tn
 end
+
+function testtesttest()
+end
